@@ -1,0 +1,32 @@
+- name: Configure Apache on EC2
+  hosts: tag_Zantac-App-Node
+  become: true
+  tasks:
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: present
+
+    - name: Update Apache Listen Port
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        line: 'Listen 8080'
+
+    - name: Allow Apache on port 8080
+      firewalld:
+        port: 8080/tcp
+        permanent: true
+        state: enabled
+      ignore_errors: true
+
+    - name: Restart Apache
+      service:
+        name: httpd
+        state: restarted
+        enabled: true
+
+    - name: Deploy index.html
+      copy:
+        content: "<h1>POC Completed using Ansible + Terraform</h1>"
+        dest: /var/www/html/index.html

@@ -1,0 +1,45 @@
+pipeline {
+  agent any
+
+  environment {
+    AWS_REGION = 'us-east-1'
+  }
+
+  stages {
+    stage('Checkout Code') {
+      steps {
+        checkout scm
+      }
+    }
+
+    stage('Terraform Init & Apply') {
+      steps {
+        dir('main') {
+          sh '''
+            terraform init
+            terraform apply -auto-approve
+          '''
+        }
+      }
+    }
+
+    stage('Run Ansible Playbook') {
+      steps {
+        dir('ansible') {
+          sh '''
+            ansible-playbook -i aws_ec2.yaml playbook.yml
+          '''
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      echo 'Deployment succeeded!'
+    }
+    failure {
+      echo 'Deployment failed. Please check the logs.'
+    }
+  }
+}
