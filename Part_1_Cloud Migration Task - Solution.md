@@ -7,6 +7,17 @@ Approach and Solution:
 1. Cloud Provider Selection:
 
    * Chossing AWS for its wide service offerings, global infrastructure, and managed services support.
+    
+AWS Migration Services we can use for this Project:
+
+1. AWS Application Migration Service (MGN): Helps lift and shift applications from on-premises or other clouds to AWS with minimal downtime and effort.
+2. AWS Database Migration Service (DMS): Enables seamless migration of databases (e.g., MySQL, PostgreSQL, Oracle) to AWS RDS or EC2-hosted databases.
+3. AWS Server Migration Service (SMS): Assists in migrating on-premises virtual machines (VMs) to Amazon EC2.
+4. AWS Migration Hub: Provides a central place to track the progress of multiple migrations across various tools and services.
+5. AWS CloudEndure : Offers disaster recovery and real-time replication during migration.
+6. Amazon S3 Transfer Acceleration / AWS Snowball: Used for large-scale data transfer to AWS from local environments.
+7. AWS DataSync: Automates and accelerates moving large-scale datasets from on-premises storage to Amazon S3, EFS, or FSx.
+
 
 2. Existing Architecture Analysis:
 
@@ -18,6 +29,21 @@ Approach and Solution:
    * Rehost the monolith app as a Lift-and-Shift on EC2 temporarily.
    * Replatform the database from on-premise MySQL to Amazon RDS (MySQL engine).
    * Refactor the monolithic Java application into microservices for better scalability and modularity.
+
+  
+# Migration Plan (App-by-App)
+
+| App Type                     | Migration Approach      | AWS Services Used                              |
+| ---------------------------- | ----------------------- | ---------------------------------------------- |
+| Java J2EE e-commerce         | Rehost or Replatform    | DMS +EC2 + ASG + ALB + RDS Oracle              |
+| .NET Retail Store App        | Replatform to Win EC2   | DMS + EC2 (Windows) + RDS SQL Server           |
+| Backend (Linux + WebLogic)   | Rehost                  | DMS +EC2 + RDS Oracle                          |
+| Middleware (Mule ESB)        | Replatform (containers) | ECS Fargate + App Mesh                         |
+| Mobile API Backend (B2B/B2C) | Rebuild (Serverless)    | API Gateway + Lambda + DynamoDB/S3             |
+| Big Data Analytics (Azure)   | Migrate & Rebuild       | DMS + S3 + Glue + Athena + EMR                 |
+| CRM (Salesforce)             | SaaS Integration        | Step Functions + API Gateway for orchestration |
+
+
 
 4. Cloud Architecture Design:
 
@@ -102,5 +128,3 @@ Approach and Solution:
     * Reduced deployment time from hours to minutes.
     * Enabled auto-scaling, self-healing, and observability for production workloads.
     * Improved system uptime and developer productivity.
-
-
