@@ -17,13 +17,13 @@ AWS Migration Services we can use for this Project:
 5. AWS CloudEndure : Offers disaster recovery and real-time replication during migration.
 6. Amazon S3 Transfer Acceleration / AWS Snowball: Used for large-scale data transfer to AWS from local environments.
 7. AWS DataSync: Automates and accelerates moving large-scale datasets from on-premises storage to Amazon S3, EFS, or FSx.
-
-
+_______
+  
 2. Existing Architecture Analysis:
 
    * The legacy application is a monolithic Java-based application with a MySQL database hosted on physical servers.
    * Applications are built and deployed manually.
-
+______
 3. Migration Strategy (6R Analysis):
 
    * Rehost the monolith app as a Lift-and-Shift on EC2 temporarily.
@@ -43,7 +43,7 @@ AWS Migration Services we can use for this Project:
 | Big Data Analytics (Azure)   | Migrate & Rebuild       | DMS + S3 + Glue + Athena + EMR                 |
 | CRM (Salesforce)             | SaaS Integration        | Step Functions + API Gateway for orchestration |
 
-
+______
 
 4. Cloud Architecture Design:
 
@@ -56,13 +56,14 @@ AWS Migration Services we can use for this Project:
    * Security: IAM roles, Security Groups, and Secret Manager for credentials.
    * CI/CD: GitHub Actions integrated with AWS EKS via kubectl and Helm.
 
+____
 5. DevOps Implementation:
 
    * Version control using Git.
    * Dockerized microservices with Dockerfiles.
    * CI pipeline: On every code commit, build Docker image and push to Amazon ECR.
    * CD pipeline: Deploy the latest image to EKS using Helm charts.
-
+____
 6. Infrastructure as Code:
 
    * Used Terraform to provision:
@@ -73,55 +74,55 @@ AWS Migration Services we can use for this Project:
      * S3 buckets
      * IAM roles and policies
    * Code stored in a Git repo and provisioned via GitHub Actions.
-
+______
 7. Monitoring and Logging:
 
    * Implemented using AWS CloudWatch and Prometheus with Grafana for application and infrastructure monitoring.
    * Fluent Bit for log aggregation and forwarding to CloudWatch Logs.
-
+______
 8. SRE Principles Applied:
 
    * Defined SLOs and SLIs for each microservice.
    * Implemented alerting using CloudWatch Alarms and Prometheus Alertmanager.
    * Applied Error Budget policies.
    * Conducted Chaos Engineering with tools like LitmusChaos on EKS.
-
+____
 9. Scalability and High Availability:
 
    * EKS nodes are auto-scaled using Cluster Autoscaler and HPA (Horizontal Pod Autoscaler).
    * Application replicas deployed across multiple Availability Zones.
    * RDS Multi-AZ enabled.
-
+____
 10. Security:
 
     * IAM roles for service accounts (IRSA) used in EKS for fine-grained access control.
     * Secrets stored in AWS Secrets Manager and fetched at runtime.
     * Ingress controller with TLS termination using ACM.
     * WAF and Shield enabled on CloudFront and ALB.
-
+____
 11. Testing and Deployment Strategy:
 
     * Unit and Integration tests in CI pipeline.
     * Canary deployments using Argo Rollouts on EKS.
     * Manual approval steps for production releases.
-
+_____
 12. Backup and Disaster Recovery:
 
     * RDS automated backups and snapshots.
     * S3 versioning and lifecycle policies.
     * Application state stored in RDS and S3 for easy restoration.
-
+____
 13. Cost Optimization:
 
     * Right-sizing EC2 instances using AWS Cost Explorer recommendations.
     * Enabled EC2 Spot instances for non-prod workloads.
     * Storage tiering and lifecycle policies on S3.
-
+_____
 14. Documentation and Handover:
 
     * All architecture, deployment, and troubleshooting docs maintained in Confluence and GitHub Wiki.
     * Knowledge transfer sessions conducted with development and operations teams.
-
+____
 15. Results:
 
     * Application modernized and successfully deployed on AWS.
