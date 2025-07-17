@@ -146,6 +146,10 @@ Auto Scaling Event ─▶ SNS Topic ─▶ Jenkins Job → Runs Ansible for new 
 ______________
 
   Architecture Diagram
+
+![Arch_diagram_](https://github.com/user-attachments/assets/509fd629-47b0-4614-9ba0-da7f706623ac)
+
+  
 zentac-cloud-migration/
 ├── ansible/
 │   ├── aws_ec2.yaml             # Dynamic inventory config
