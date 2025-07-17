@@ -1,4 +1,4 @@
- Zantac Inc. | AWS Cloud Migration Strategy
+ Zantac IT | AWS Cloud Migration Strategy
 
 This document outlines a comprehensive cloud migration strategy including current-state assessment, AWS target architecture, app-by-app migration approach, and phased rollout.
 _____
