@@ -4,7 +4,7 @@ variable "vpc_cidr" {
 variable "key_name" {
   description = "EC2 Key Pair Name"
   type        = string
-  default     = "zantac-key"  # ✅ Change this to your actual key name
+  default     = "zantac-key"  
 }
 
 variable "user_data_path" {
